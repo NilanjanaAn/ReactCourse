@@ -1,0 +1,12 @@
+table img {
+  width: 50px;
+  height: 50;
+}
+
+table, th, td {
+    border: 1px solid blueviolet;
+  }
+
+div {
+    text-align: center;
+}
