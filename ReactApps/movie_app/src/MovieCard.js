@@ -2,13 +2,11 @@ import React from "react";
 // or <import {Component} from "react">
 // and use <extends Component> directly
 
-class MovieCard extends React.Component {
-  render() {
-    // const {movieInfo: data}=this.props; // renaming
+function MovieCard (props) {
+    // const {movieInfo: data}=props; // renaming
     // const { title, plot, price, rating, poster, starCount, fav, inCart } = data;
-    const { addStar, minusStar, toggleCart, toggleFav, movieInfo } = this.props;
-    const { title, plot, price, rating, poster, starCount, fav, inCart } =
-      movieInfo;
+    const { addStar, minusStar, toggleCart, toggleFav, movieInfo } = props;
+    const { title, plot, price, rating, poster, starCount, fav, inCart } = movieInfo;
     return (
       <div className="main">
         <div className="movie-card">
@@ -118,7 +116,6 @@ class MovieCard extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
 export default MovieCard;

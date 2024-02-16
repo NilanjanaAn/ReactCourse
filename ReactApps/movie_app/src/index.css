@@ -9,7 +9,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: rgb(255, 233, 237);
+  background: rgb(255, 203, 203);
+  /* background-image: url("https://images.pexels.com/photos/1831234/pexels-photo-1831234.jpeg?cs=srgb&dl=pexels-madison-inouye-1831234.jpg&fm=jpg"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  /* background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c); */
+}
+
+.bg {
+  opacity: 0.2;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: auto;
+  z-index: -50;
 }
 
 .main {
@@ -20,12 +35,13 @@ body {
   box-sizing: border-box;
 }
 .movie-card {
-  background: #fff;
+  background: #ffffff6b;
   padding: 0;
   border: none;
   border-radius: 10px;
   /* box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #f1f1f1; */
   display: flex;
+  backdrop-filter: blur(9px);
 }
 .movie-card:not(:first-child) {
   margin-top: 20px;
