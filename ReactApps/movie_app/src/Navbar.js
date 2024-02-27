@@ -32,6 +32,8 @@ function Navbar(props) {
           width: "100%",
           height: "70px",
           background: "linear-gradient(0.25turn,  #f69d3c, #ebf8e1,#3f87a6)",
+          // backgroundColor: "#FFFFFF",
+          // backgroundImage: "URL(https://static.vecteezy.com/system/resources/previews/001/987/871/non_2x/abstract-black-stripes-diagonal-background-free-vector.jpg)",
           display: "flex",
           justifyContent: "space-between",
         }}

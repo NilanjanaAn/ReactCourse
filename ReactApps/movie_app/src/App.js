@@ -58,11 +58,11 @@ class App extends Component {
     return (
       <>
         <Navbar cartItemCount={cartItemCount}/>
-        <img
+        {/* <img
           className="bg"
           src="https://img.freepik.com/free-photo/movie-background-collage_23-2149876014.jpg?w=1060&t=st=1708065724~exp=1708066324~hmac=aedca96d36a02ef8a6a41a3acabc0a7e17ebeca540ba6e210682ad01e58de1b9"
           alt="bg"
-        />
+        /> */}
         {/* <h1 className="heading">Movie App</h1> */}
         <MovieList
           movies={movies}
