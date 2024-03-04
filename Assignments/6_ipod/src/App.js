@@ -14,87 +14,122 @@ class App extends React.Component {
     this.state = {
       active: 0,
       menu: ["Coverflow", "Music", "Games", "Settings"],
+      musicMenu: ["All Songs", "Artists", "Albums"],
       showing: false,
+      innerMenu: false,
       playing: false,
-      audio: null
+      audio: null,
+      currentInnerMenu: 0,
     };
   }
 
-  changeMenu = (clockwise, menu) => {
-    if(this.state.showing)
-      return;
-    if (menu !== 0 && menu !== 1 && menu !== 2 && menu !== 3) {
-      return;
-    }
-    let min = 0;
-    let max = 3;
+  changeMenu = (clockwise, element, musicMenu) => {
+    if (this.state.showing) return;
+    if (!musicMenu) {
+      if (element !== 0 && element !== 1 && element !== 2 && element !== 3) {
+        return;
+      }
+      let min = 0;
+      let max = 3;
 
-    if (clockwise === 1) {
-      if (this.state.active >= max) {
-        this.setState({ active: min });
+      if (clockwise === 1) {
+        if (this.state.active >= max) {
+          this.setState({ active: min });
+        } else {
+          this.setState({ active: this.state.active + 1 });
+        }
       } else {
-        this.setState({ active: this.state.active + 1 });
+        if (this.state.active <= min) {
+          this.setState({ active: max });
+        } else {
+          this.setState({ active: this.state.active - 1 });
+        }
       }
     } else {
-      if (this.state.active <= min) {
-        this.setState({ active: max });
+      if (element !== 0 && element !== 1 && element !== 2) {
+        return;
+      }
+      let min = 0;
+      let max = 2;
+
+      if (clockwise === 1) {
+        if (this.state.currentInnerMenu >= max) {
+          this.setState({ currentInnerMenu: min });
+        } else {
+          this.setState({ currentInnerMenu: this.state.currentInnerMenu + 1 });
+        }
       } else {
-        this.setState({ active: this.state.active - 1 });
+        if (this.state.currentInnerMenu <= min) {
+          this.setState({ currentInnerMenu: max });
+        } else {
+          this.setState({ currentInnerMenu: this.state.currentInnerMenu - 1 });
+        }
       }
     }
   };
 
   menuBackward = () => {
-    this.setState(()=>({showing:false}))
+    if (this.state.showing) this.setState(() => ({ showing: false }));
+    else if (this.state.innerMenu) this.setState(() => ({ innerMenu: false }));
   };
 
-  menuForward = (id) => {
-    this.setState(()=>({showing:true}))
+  menuForward = (element) => {
+    if (element === 1 && !this.state.innerMenu) {
+      this.setState(() => ({ innerMenu: true }));
+    } else this.setState(() => ({ showing: true }));
   };
 
   togglePlayPause = () => {
-    if (!this.state.showing || this.state.audio===null) {
+    if (!this.state.showing || this.state.audio === null) {
       return;
     }
     if (this.state.playing === true) {
       this.setState({ playing: false });
       this.state.audio.pause();
       console.log("pause");
-    }
-    else {
+    } else {
       this.setState({ playing: true });
       this.state.audio.play();
       console.log("play");
     }
-  }
+  };
 
   startPlay = () => {
     console.log(this.state.audio);
-    if (!this.state.showing || this.state.audio===null) {
+    if (!this.state.showing || this.state.audio === null) {
       return;
     }
     this.state.audio.play();
     console.log("played");
-  }
+  };
 
-  setAudio=(audio)=>{
-    this.setState(()=>({audio}));
-    console.log("set");
+  setAudio = (audio) => {
+    this.setState(() => ({ audio }));
     this.startPlay();
-  }
+  };
 
   render() {
-    const { active, showing } = this.state;
+    const { active, showing, innerMenu, currentInnerMenu } = this.state;
     return (
       <>
         <div className="iPod-app">
-          <Screen currentMenu={active} showing={showing} setAudio={this.setAudio} togglePlayPause={this.togglePlayPause} startPlay={this.startPlay}/>
+          <Screen
+            currentMenu={active}
+            showing={showing}
+            innerMenu={innerMenu}
+            setAudio={this.setAudio}
+            togglePlayPause={this.togglePlayPause}
+            startPlay={this.startPlay}
+            currentInnerMenu={currentInnerMenu}
+          />
           <Wheel
             currentMenu={active}
+            innerMenu={innerMenu}
             changeMenu={this.changeMenu}
             menuForward={this.menuForward}
             menuBackward={this.menuBackward}
             togglePlayPause={this.togglePlayPause}
+            currentInnerMenu={currentInnerMenu}
           />
         </div>
       </>

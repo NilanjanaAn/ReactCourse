@@ -9,7 +9,7 @@ class Wheel extends React.Component {
   }
 
   controlWheel = (e) => {
-    const { changeMenu, currentMenu } = this.props;
+    const { changeMenu, currentMenu, innerMenu } = this.props;
     if (e.detail.distanceFromOrigin === 0) {
       this.angle = e.detail.angle;
     }
@@ -18,18 +18,18 @@ class Wheel extends React.Component {
       if (e.detail.distanceFromLast === 0) {
         return;
       } else if (e.detail.distanceFromLast < 0) {
-        changeMenu(1, currentMenu);
+        changeMenu(1, currentMenu, innerMenu);
       } else {
-        changeMenu(0, currentMenu);
+        changeMenu(0, currentMenu, innerMenu);
       }
     } else if (Math.abs(this.angle - e.detail.angle) > 15) {
       this.angle = Math.abs(e.detail.angle);
       if (e.detail.distanceFromLast === 0) {
         return;
       } else if (e.detail.distanceFromLast > 0) {
-        changeMenu(1, currentMenu);
+        changeMenu(1, currentMenu, innerMenu);
       } else {
-        changeMenu(0, currentMenu);
+        changeMenu(0, currentMenu, innerMenu);
       }
     }
   };
