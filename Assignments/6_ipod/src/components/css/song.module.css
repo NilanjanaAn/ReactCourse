@@ -1,0 +1,45 @@
+.songPlaying{
+    width: 100%;
+    padding-top: 5%;
+    padding-bottom: 4%;
+    background-color: #E3F2FD;
+}
+
+.songDetails{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.songDetails img{
+    margin: auto;
+    width: 100px;
+    height: 100px;
+}
+
+.songDetails h1{
+    margin: 0px;
+    font-size: 20px;
+}
+
+.status{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+#progress{
+    width: 65%;
+    height: 10px;
+    margin: 0px 5px;
+    background-color: gray;
+}
+
+#progress-bar{
+    height: 10px;
+    background-color: green;
+}

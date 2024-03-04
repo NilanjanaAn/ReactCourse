@@ -1,0 +1,31 @@
+.nav {
+  width: 100%;
+  height: 20px;
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgb(198, 204, 204);
+  border-radius: 4px 4px 0px 0px;
+}
+
+.wifi{
+    margin-left: 3px;
+    font-size: smaller;
+}
+
+.battery{
+    margin-right: 3px;
+    margin-top: -1px;
+}
+
+.batteryicon
+{
+    width: 22px;
+    height: auto;
+}
+
+.time {
+  padding: 0px;
+  margin:  -1.5px auto auto auto;
+}
+
+

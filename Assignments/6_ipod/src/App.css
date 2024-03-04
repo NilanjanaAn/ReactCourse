@@ -1,0 +1,10 @@
+.iPod-app{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    padding: 15px 7px 20px 7px;
+    background-color: rgb(137, 215, 235);
+     box-shadow: inset 0 0 20px 3px rgb(62, 111, 145);
+    -webkit-box-reflect: below 8px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent) , to(rgba(250, 250, 250, 0.1)));
+}
