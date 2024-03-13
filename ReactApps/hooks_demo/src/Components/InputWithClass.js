@@ -4,8 +4,8 @@ export default class Input extends React.Component {
   constructor() {
     super();
     this.state = {
-      firstname: "",
-      lastname: "",
+      firstname: "New",
+      lastname: "User",
     };
   }
   changeName = (value, type) => {
@@ -15,6 +15,12 @@ export default class Input extends React.Component {
       this.setState({ lastname: value });
     }
   };
+  componentDidMount() {
+    document.title = this.state.firstname + " " + this.state.lastname;
+  }
+  componentDidUpdate(prevProps, prevState) {
+    document.title = this.state.firstname + " " + this.state.lastname;
+  }
   render() {
     return (
       <>

@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Input() {
   const [firstname, setFirstname] = useState("New");
   const [lastname, setLastname] = useState("User");
+
+  // both cdm and cdu
+  useEffect(() => {
+    document.title=firstname+" "+lastname;
+  });
+
   return (
     <>
       <div className="section">
