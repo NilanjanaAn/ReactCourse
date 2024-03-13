@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./css/wheel.module.css";
-import ZingTouch from 'zingtouch';
+import ZingTouch from "zingtouch";
 
 class Wheel extends React.Component {
   constructor() {
@@ -40,31 +40,36 @@ class Wheel extends React.Component {
     const { menuForward, currentMenu } = this.props;
     return (
       <>
-        <div className="outerWheel" id={styles.outerWheel}>
-          <div className={styles.wheel} id="wheel">
-            <div className={styles.menuButton} id="menu-button">
-              <div style={{ color: theme }}>MENU</div>
-            </div>
-            <div className="wheelButton" id={styles.forwardButton}>
-              <i style={{ color: theme }} className="fas fa-fast-forward"></i>
-            </div>
-            <div className="wheelButton" id={styles.playPauseButton}>
-              <div>
-                <i style={{ color: theme }} className="fa fa-play"></i>{" "}
-                <i style={{ color: theme }} className="fa fa-pause"></i>
+        <section id="controls">
+          <div className="outerWheel" id={styles.outerWheel}>
+            <div className={styles.wheel} id="wheel">
+            {/*  */}
+              <div className={`${styles.menuButton} ${"buttons"}`} id="menu-button">
+                <div style={{ color: theme }}>MENU</div>
+              </div>
+              <div className="buttons" id={styles.forwardButton} draggable="false">
+                <i style={{ color: theme }} className="fas fa-fast-forward"></i>
+              </div>
+              <div className="buttons" id={styles.playPauseButton} draggable="false">
+                <div>
+                  <i style={{ color: theme }} className="fa fa-play"></i>{" "}
+                  <i style={{ color: theme }} className="fa fa-pause"></i>
+                </div>
+              </div>
+              <div className="buttons" id={styles.reverseButton} draggable="false">
+                <i style={{ color: theme }} className="fa fa-fast-backward"></i>
               </div>
             </div>
-            <div className="wheelButton" id={styles.reverseButton}>
-              <i style={{ color: theme }} className="fa fa-fast-backward"></i>
-            </div>
+            <div
+              style={{ backgroundColor: caseColor }}
+              className={styles.okButton}
+              id="ok-button"
+              onClick={() => {
+                menuForward(currentMenu);
+              }}
+            ></div>
           </div>
-          <div
-            style={{ backgroundColor: caseColor }}
-            className={styles.okButton}
-            id="ok-button"
-            onClick={() => {menuForward(currentMenu)}}
-          ></div>
-        </div>
+        </section>
       </>
     );
   }
@@ -83,9 +88,9 @@ class Wheel extends React.Component {
     activeRegion.bind(wheel, "rotate", function (e) {
       controlWheel(e);
     });
-    activeRegion.bind(playPause, 'tap', function (e) {
+    activeRegion.bind(playPause, "tap", function (e) {
       togglePlayPause();
-  });
+    });
   }
 }
 

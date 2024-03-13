@@ -11,6 +11,6 @@ function Coverflow(props) {
   export default Coverflow;
   
   const style = {
-    width: 100.5 + '%',
-    height: 183
+    width: 100 + '%',
+    height: 182
   }

@@ -5,20 +5,22 @@ import Albums from './Albums';
 
 
 function Music(props) {
-  const {musicMenu, allSongs, artists, albums} = props.display;
-  const activeItemInMenu = props.activeItemInMenu;
+  const {innerMenu, currentInnerMenu, showing} = props;
     return (
       <div className="display">
-        {
-          !musicMenu
-            ?allSongs
-              ?<AllSongs />
-              :artists
-                ?<Artists />
-                :<Albums />
-            :<MusicMenu activeItemInMenu={activeItemInMenu}/>
-        }
-      </div>
+            {!showing && innerMenu && (
+              <MusicMenu currentInnerMenu={currentInnerMenu} />
+            )}
+            {innerMenu &&
+              showing &&
+              currentInnerMenu === 0 && <AllSongs />}
+            {innerMenu &&
+              showing &&
+              currentInnerMenu === 1 && <Artists />}
+            {innerMenu &&
+              showing &&
+              currentInnerMenu === 2 && <Albums />}
+          </div>
     );
   }
   

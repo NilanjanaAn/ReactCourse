@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Screen from "./components/Screen";
 import Wheel from "./components/Wheel";
+import Controls from "./components/Controls";
 
 class App extends React.Component {
   // Handle the rotate event fired from the control component
@@ -122,7 +123,7 @@ class App extends React.Component {
             startPlay={this.startPlay}
             currentInnerMenu={currentInnerMenu}
           />
-          <Wheel
+          {/* <Wheel
             currentMenu={active}
             innerMenu={innerMenu}
             changeMenu={this.changeMenu}
@@ -130,7 +131,15 @@ class App extends React.Component {
             menuBackward={this.menuBackward}
             togglePlayPause={this.togglePlayPause}
             currentInnerMenu={currentInnerMenu}
-          />
+          /> */}
+          <Controls
+          currentMenu={active}
+          innerMenu={innerMenu}
+          changeMenu={this.changeMenu}
+          menuForward={this.menuForward}
+          menuBackward={this.menuBackward}
+          togglePlayPause={this.togglePlayPause}
+          currentInnerMenu={currentInnerMenu}/>
         </div>
       </>
     );

@@ -12,5 +12,5 @@ export default Games;
 
 const style = {
   width: 100 + "%",
-  height: 183,
+  height: 180,
 };

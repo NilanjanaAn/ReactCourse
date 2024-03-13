@@ -11,6 +11,6 @@ function Albums(props) {
 export default Albums;
 
 const style = {
-  width: 100.5 + '%',
-  height: 184
+  width: 100 + "%",
+  height: 180,
 }
