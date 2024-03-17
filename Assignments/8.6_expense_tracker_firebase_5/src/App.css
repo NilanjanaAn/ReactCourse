@@ -17,7 +17,13 @@ h4 {
 
 .mainHeading {
   text-align: center;
-  margin-top: 2rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  background-color: white;
+  z-index: 1;
 }
 
 .App {
@@ -25,6 +31,31 @@ h4 {
   min-height: 100vh;
   --input-width: 95%;
   --input-height: 2rem;
+  display: flex;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 57vw;
+  top: 20vh;
+  position: fixed;
+}
+
+.infoContainer {
+  margin-top: -15vh;
+  width: 22vw;
+}
+
+hr {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  position: fixed;
+  top: 8vh;
+  width: 100%;
+  z-index: 2;
 }
 
 .expenseContainer {
@@ -32,6 +63,6 @@ h4 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 3rem auto;
-  width: 350px;
+  margin: 20vh 0 0 61vw;
+  width: 30vw;
 }

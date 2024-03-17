@@ -64,7 +64,7 @@ const ExpenseForm = ({
       />
       <div>
         <label htmlFor="expenseAmount">Amount</label>
-        <div>(negative - expense,positive-income)</div>
+        <div>(negative - expense, positive - income)</div>
       </div>
       <input
         className={styles.input}

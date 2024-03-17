@@ -124,15 +124,20 @@ function App() {
     <>
       <ToastContainer />
       <h2 className="mainHeading">Expense Tracker</h2>
+      <hr />
       <div className="App">
-        <ExpenseForm
-          addExpense={addExpense}
-          expenseToUpdate={expenseToUpdate}
-          updateExpense={updateExpense}
-          resetExpenseToUpdate={resetExpenseToUpdate}
-        />
+        <div className="formContainer">
+          <ExpenseForm
+            addExpense={addExpense}
+            expenseToUpdate={expenseToUpdate}
+            updateExpense={updateExpense}
+            resetExpenseToUpdate={resetExpenseToUpdate}
+          />
+          <div className="infoContainer">
+            <ExpenseInfo expenses={state.expenses} />
+          </div>
+        </div>
         <div className="expenseContainer">
-          <ExpenseInfo expenses={state.expenses} />
           <ExpenseList
             expenses={state.expenses}
             deleteExpense={deleteExpense}
