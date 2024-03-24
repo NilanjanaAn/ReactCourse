@@ -13,7 +13,7 @@ export const Home = () => {
         experience for our customers, with a focus on speed, convenience, and
         quality.
       </p>
-      <div className="socails">
+      <div className="socials">
         <img
           src="https://cdn-icons-png.flaticon.com/512/3955/3955024.png"
           alt="ig"

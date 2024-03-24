@@ -31,14 +31,14 @@
   width: 40vw;
   margin: 0 auto;
 }
-.socails {
+.socials {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 30px;
   margin-top: 30px;
 }
-.socails img {
+.socials img {
   width: 40px;
   cursor: pointer;
 }
