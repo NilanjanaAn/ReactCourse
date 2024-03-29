@@ -4,7 +4,7 @@ import MinusIcon from "../../../UI/Icons/MinusIcon";
 import PlusIcon from "../../../UI/Icons/PlusIcon";
 import { useAuthValue } from "../../../../context/Auth/AuthState";
 import { useNavigate } from "react-router-dom";
-import { db, cartCollection } from "../../../../config/firebase";
+import { db } from "../../../../config/firebase";
 import {
   addDoc,
   collection,
@@ -31,10 +31,13 @@ const ProductDetails = ({ productId, title, onCart, price, quantity }) => {
     if (isAuthenticated && user) {
       setProductAddingToCart(true);
       const querySnapshot = await getDocs(
-        query(cartCollection, where("id", "==", productId))
+        query(
+          collection(db, "userCart", user.uid, "cart"),
+          where("id", "==", productId)
+        )
       );
       if (querySnapshot.empty) {
-        await addDoc(cartCollection, {
+        await addDoc(collection(db, "userCart", user.uid, "cart"), {
           id: productId,
           qty: 1,
         });
@@ -42,7 +45,10 @@ const ProductDetails = ({ productId, title, onCart, price, quantity }) => {
         const productDoc = querySnapshot.docs[0];
         let qty = productDoc.data().qty;
         qty = qty + 1;
-        const docRef = doc(cartCollection, productDoc.id);
+        const docRef = doc(
+          collection(db, "userCart", user.uid, "cart"),
+          productDoc.id
+        );
         await updateDoc(docRef, {
           qty,
         });
@@ -57,12 +63,12 @@ const ProductDetails = ({ productId, title, onCart, price, quantity }) => {
     try {
       setProductRemovingCart(true);
       const querySnapshot = await getDocs(
-        query(cartCollection, where("id", "==", productId))
+        query(collection(db, "userCart", user.uid, "cart"), where("id", "==", productId))
       );
 
       if (!querySnapshot.empty) {
         const productDoc = querySnapshot.docs[0];
-        await deleteDoc(doc(cartCollection, productDoc.id));
+        await deleteDoc(doc(collection(db, "userCart", user.uid, "cart"), productDoc.id));
       }
     } catch (error) {
       toast.error(error.message);
@@ -78,12 +84,12 @@ const ProductDetails = ({ productId, title, onCart, price, quantity }) => {
   //Create a Function for Handling the product quantity increase
   const increaseQuantity = async (e) => {
     const querySnapshot = await getDocs(
-      query(cartCollection, where("id", "==", productId))
+      query(collection(db, "userCart", user.uid, "cart"), where("id", "==", productId))
     );
     const productDoc = querySnapshot.docs[0];
     let qty = productDoc.data().qty;
     qty = qty + 1;
-    const docRef = doc(cartCollection, productDoc.id);
+    const docRef = doc(collection(db, "userCart", user.uid, "cart"), productDoc.id);
     await updateDoc(docRef, {
       qty,
     });
@@ -92,15 +98,15 @@ const ProductDetails = ({ productId, title, onCart, price, quantity }) => {
   //Create a function for  Handling the product quantity decrease
   const decreaseQuantity = async (e) => {
     const querySnapshot = await getDocs(
-      query(cartCollection, where("id", "==", productId))
+      query(collection(db, "userCart", user.uid, "cart"), where("id", "==", productId))
     );
     const productDoc = querySnapshot.docs[0];
     let qty = productDoc.data().qty;
     qty = qty - 1;
     if (qty === 0) {
-      await deleteDoc(doc(cartCollection, productDoc.id));
+      await deleteDoc(doc(collection(db, "userCart", user.uid, "cart"), productDoc.id));
     } else {
-      const docRef = doc(cartCollection, productDoc.id);
+      const docRef = doc(collection(db, "userCart", user.uid, "cart"), productDoc.id);
       await updateDoc(docRef, {
         qty,
       });
@@ -137,7 +143,7 @@ const ProductDetails = ({ productId, title, onCart, price, quantity }) => {
           title="Remove from Cart"
           onClick={handleRemove}
         >
-          {productRemovingFromCart ? Removing : "Remove from Cart"}
+          {productRemovingFromCart ? "Removing" : "Remove from Cart"}
         </button>
       )}
     </div>

@@ -9,6 +9,7 @@ import { addDataToCollection } from "../../utils/utils";
 function HomePage() {
   // Write logic to Fetch products on app mount
   // useState() hook for initial state set and render automatically
+
   const [searchProduct, setsearch] = useState("");
   const [priceRange, setPriceRange] = useState(75000);
 

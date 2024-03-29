@@ -32,6 +32,4 @@ setPersistence(auth, browserLocalPersistence);
 
 // Export Firestore collections for products, user carts, user orders, and users
 export const productCollection = collection(db, "products");
-export const cartCollection = collection(db, "userCart");
-export const orderCollection = collection(db, "userOrder");
 export const userCollection = collection(db, "users");

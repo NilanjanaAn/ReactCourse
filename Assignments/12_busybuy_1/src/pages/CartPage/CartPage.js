@@ -1,18 +1,20 @@
 import React, { useEffect, useContext, useState } from "react";
 import Loader from "../../components/UI/Loader/Loader";
 import styles from "./CartPage.module.css";
-import { db, cartCollection, orderCollection } from "../../config/firebase";
+import { db } from "../../config/firebase";
 import {
   getDocs,
   deleteDoc,
   doc,
   addDoc,
   onSnapshot,
+  collection,
 } from "firebase/firestore";
 import data from "../../utils/data";
 import ProductList from "../../components/Product/ProductList/ProductList";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useAuthValue } from "../../context/Auth/AuthState";
 
 const CartPage = ({}) => {
   const [loading, setLoading] = useState();
@@ -20,19 +22,20 @@ const CartPage = ({}) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [purchasing, setPurchasing] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuthValue();
 
   // Write logic to Clear user cart
   const clearCart = async () => {
-    const cartSnapshot = await getDocs(cartCollection);
+    const cartSnapshot = await getDocs(collection(db, "userCart", user.uid, "cart"));
     cartSnapshot.forEach(async (productDoc) => {
-      await deleteDoc(doc(cartCollection, productDoc.id));
+      await deleteDoc(doc(collection(db, "userCart", user.uid, "cart"), productDoc.id));
     });
   };
 
   // Write logic to Fetch user cart products
 
   const getCart = async () => {
-    // const cartSnapshot = await getDocs(cartCollection);
+    // const cartSnapshot = await getDocs(collection(db, "userCart", user.uid, "cart"));
     // if (cartSnapshot.empty) {
     //   return [];
     // }
@@ -41,7 +44,7 @@ const CartPage = ({}) => {
     //   qty: doc.data().qty,
     // }));
     // return cartItems;
-    const unsub = onSnapshot(cartCollection, (snapshot) => {
+    const unsub = onSnapshot(collection(db, "userCart", user.uid, "cart"), (snapshot) => {
       const cartItems = [];
       snapshot.forEach((product) => {
         cartItems.push({ id: product.data().id, qty: product.data().qty });
@@ -113,7 +116,7 @@ const CartPage = ({}) => {
     const orderObject = {
       orders: order,
     };
-    const docRef = await addDoc(orderCollection, orderObject);
+    const docRef = await addDoc(collection(db, "userOrder", user.uid, "order"), orderObject);
     clearCart();
     setPurchasing(false);
     navigate("/myorders");

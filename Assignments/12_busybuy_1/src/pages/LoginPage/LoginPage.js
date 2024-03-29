@@ -11,7 +11,6 @@ const LoginPage = () => {
 
   const { loading, isAuthenticated, error, message, login, clearError, user } =
     useAuthValue();
-
   useEffect(() => {
     // Redirect to homepage if user is already authenticated or login fails
     if (isAuthenticated && user) {

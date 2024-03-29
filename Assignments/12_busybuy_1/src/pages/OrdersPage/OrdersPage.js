@@ -2,22 +2,28 @@ import React, { useState, useEffect, useContext } from "react";
 import styles from "./OrdersPage.module.css";
 import OrderTable from "../../components/OrderTable/OrderTable";
 import Loader from "../../components/UI/Loader/Loader";
-import { orderCollection } from "../../config/firebase";
-import { getDocs } from "firebase/firestore";
+import { getDocs, orderBy } from "firebase/firestore";
+import { useAuthValue } from "../../context/Auth/AuthState";
+import { collection } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { user } = useAuthValue();
 
   // Fetch user orders from firestore
   const getOrders = async () => {
-    const orderSnapshot = await getDocs(orderCollection);
+    const orderSnapshot = await getDocs(
+      collection(db, "userOrder", user.uid, "order")
+    );
     if (orderSnapshot.empty) {
       return [];
     }
     const orderItems = orderSnapshot.docs.map((orderDoc) => ({
       ...orderDoc.data(),
     }));
+    console.log("orderItems", orderItems);
     return orderItems;
   };
 
