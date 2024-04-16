@@ -1,12 +1,30 @@
 import { toggleToDo } from "../../redux/actions/todoActions";
 import "./ToDoList.css";
 import { useSelector, useDispatch } from "react-redux";
-import { todoActions, todoSelector } from "../../redux/reducers/todoReducer";
+import { getInitStateAsync, todoActions, todoSelector } from "../../redux/reducers/todoReducer";
+import { useEffect } from "react";
+import axios from "axios";
 
 function ToDoList({ onToggle }) {
   // const todos = useSelector((state) => state.todoRed.todos);
   const todos = useSelector(todoSelector);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // fetch("http://localhost:4100/api/todos")
+    //   .then((res) => res.json())
+    //   .then((parsedJson) => {
+    //     console.log(parsedJson);
+    //   });
+
+    // axios.get("http://localhost:4100/api/todos").then((res) => {
+    //   console.log(res.data);
+    //   dispatch(todoActions.setInit(res.data));
+    // });
+
+    dispatch(getInitStateAsync());
+  }, []);
+
   return (
     <div className="container">
       <ul>

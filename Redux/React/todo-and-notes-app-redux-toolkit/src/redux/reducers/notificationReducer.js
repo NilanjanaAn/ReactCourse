@@ -16,7 +16,8 @@ const notificationSlice = createSlice({
       state.message = "";
     },
   },
-  // // not recommended
+  
+  // not recommended
   // extraReducers: {
   //   // to perform dependent actions
   //   "todo/add": (state, action) => {
@@ -29,26 +30,26 @@ const notificationSlice = createSlice({
   // },
 
   // builder method (recommended)
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(todoActions.add, (state, action) => {
-  //       state.message = "A new to-do has been created!";
-  //     })
-  //     .addCase(noteActions.add, (state, action) => {
-  //       state.message = "A new note has been created!";
-  //     });
-  // },
-
-  // map method (recommended)
-  extraReducers: {
-    // map objects: [key]: value
-    [todoActions.add]: (state, action) => {
-      state.message = "A new to-do has been created!";
-    },
-    [noteActions.add]: (state, action) => {
-      state.message = "A new note has been created!";
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(todoActions.add, (state, action) => {
+        state.message = "A new to-do has been created!";
+      })
+      .addCase(noteActions.add, (state, action) => {
+        state.message = "A new note has been created!";
+      });
   },
+
+  // map method
+  // extraReducers: {
+  //   // map objects: [key]: value
+  //   [todoActions.add]: (state, action) => {
+  //     state.message = "A new to-do has been created!";
+  //   },
+  //   [noteActions.add]: (state, action) => {
+  //     state.message = "A new note has been created!";
+  //   },
+  // },
 });
 
 export const notificationReducer = notificationSlice.reducer;
